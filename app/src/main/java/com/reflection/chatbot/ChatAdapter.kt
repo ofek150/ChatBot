@@ -12,6 +12,8 @@ class ChatAdapter(
     private val messages: MutableList<Message>
     ) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
+    private lateinit var rv: RecyclerView
+
     class ChatViewHolder(val binding:MessageItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -20,6 +22,12 @@ class ChatAdapter(
             MessageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ChatViewHolder(binding)
     }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        rv = recyclerView
+    }
+
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
@@ -46,13 +54,19 @@ class ChatAdapter(
 
     fun addMessage(message: Message) {
         messages.add(message)
-        notifyItemInserted(messages.size - 1)
+        Handler(Looper.getMainLooper()).post {
+            notifyItemInserted(messages.size - 1)
+            scrollToBottom()
+        }
     }
 
     fun removeLastMessage() {
         val lastMessageIndex = messages.size - 1
         messages.removeAt(lastMessageIndex)
-        notifyItemRemoved(lastMessageIndex)
+        Handler(Looper.getMainLooper()).post {
+            notifyItemRemoved(lastMessageIndex)
+            scrollToBottom()
+        }
     }
 
 
@@ -61,12 +75,18 @@ class ChatAdapter(
         messages.clear()
         Handler(Looper.getMainLooper()).post {
             notifyDataSetChanged()
+            scrollToBottom()
         }
     }
 
     fun getMessages() : MutableList<Message>
     {
         return messages
+    }
+
+    fun scrollToBottom()
+    {
+        rv.smoothScrollToPosition(itemCount - 1)
     }
 
 

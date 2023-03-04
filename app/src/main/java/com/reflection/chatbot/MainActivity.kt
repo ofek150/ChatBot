@@ -14,8 +14,9 @@ import com.reflection.chatbot.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    //private val OPENAI_API_KEY: String = System.getenv("OPENAI_API_KEY") as String
-    private val OPENAI_API_KEY: String = "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"
+    //private val OPENAI_API_KEY: String = System.getenv("OPENAI_API_KEY") ?: "NO_KEY"
+    private val OPENAI_API_KEY = "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" // Replace to env
+
     private val openAI = OpenAI(OPENAI_API_KEY)
     private lateinit var chatAdapter: ChatAdapter
 
@@ -25,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        println("API KEY: $OPENAI_API_KEY")
         chatAdapter = ChatAdapter(mutableListOf())
         binding.rvChatMessages.adapter = chatAdapter
         binding.rvChatMessages.layoutManager = LinearLayoutManager(this)
-
 
         binding.submitBtn.setOnClickListener{
             val prompt : String = binding.promptInput.text.toString()
@@ -43,11 +44,14 @@ class MainActivity : AppCompatActivity() {
                         tokensUsage = -10
                     )
                 )
-                runBlocking {
+                CoroutineScope(Dispatchers.IO).launch {
+                    sendPrompt()
+                }
+                /*runBlocking {
                     launch {
                         sendPrompt()
                     }
-                }
+                }*/
             }
         }
 
