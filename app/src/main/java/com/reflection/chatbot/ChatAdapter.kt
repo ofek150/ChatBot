@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.reflection.chatbot.databinding.MessageItemBinding
@@ -42,7 +43,7 @@ class ChatAdapter(
             0 -> "N/A"
             else -> curMessage.tokensUsage.toString()
         }
-
+        if(curMessage.isSentByUser) holder.binding.tokenUsage.visibility = View.GONE
         holder.binding.roleText.text = role
         holder.binding.messageText.text = curMessage.content
         holder.binding.tokenUsage.text = "Total token usage: $tokenUsageText"
@@ -84,7 +85,7 @@ class ChatAdapter(
         return messages
     }
 
-    fun scrollToBottom()
+    private fun scrollToBottom()
     {
         rv.smoothScrollToPosition(itemCount - 1)
     }
