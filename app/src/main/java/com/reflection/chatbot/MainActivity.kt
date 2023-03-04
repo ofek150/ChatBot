@@ -15,7 +15,7 @@ import com.reflection.chatbot.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     //private val OPENAI_API_KEY: String = System.getenv("OPENAI_API_KEY") ?: "NO_KEY"
-    private val OPENAI_API_KEY = "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" // Replace to env
+    private val OPENAI_API_KEY = "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" // Change to env
 
     private val openAI = OpenAI(OPENAI_API_KEY)
     private lateinit var chatAdapter: ChatAdapter
