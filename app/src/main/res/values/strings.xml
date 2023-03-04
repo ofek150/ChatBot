@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ChatBot</string>
+    <string name="submitBtnTxt">Submit</string>
+    <string name="promptInputHint">Enter prompt:</string>
+    <string name="messageTextPlaceHolder"><![CDATA[<message>]]></string>
+    <string name="roleTextPlaceholder">Role</string>
+</resources>
