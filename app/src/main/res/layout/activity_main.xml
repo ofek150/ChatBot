@@ -54,7 +54,7 @@
             android:maxEms="300"
             android:maxLines="8"
             android:minHeight="48dp"
-            android:paddingStart="12sp"
+            android:paddingStart="12dp"
             android:textColorHint="@color/prompt_hint"
             tools:ignore="RtlSymmetry" />
 

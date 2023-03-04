@@ -22,23 +22,26 @@
 
         <TextView
             android:id="@+id/roleText"
+            android:textAlignment="textStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5sp"
-            android:textSize="20sp"
+            android:textSize="29sp"
             android:textColor="@color/white"
             android:text="@string/roleTextPlaceholder" />
 
         <TextView
             android:id="@+id/messageText"
+            android:textAlignment="textStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textColor="@color/white"
             android:text="@string/messageTextPlaceHolder" />
 
         <TextView
             android:id="@+id/tokenUsage"
+            android:textAlignment="textStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
